@@ -2,6 +2,7 @@ require("../src/bootstrap");
 const assert = require('assert');
 
 const { connect, clearDatabase, closeDatabase } = require('../test/db.ts');
+const userService = require("../src/user/user.service");
 
 
 /**
@@ -10,7 +11,7 @@ const { connect, clearDatabase, closeDatabase } = require('../test/db.ts');
 
 const users = [
 	{
-		fullName: "Jhon",
+		fullName: "Jhon  ",
 		phone: "0171212113",
 		email: "jhonedoe@gmail.com",
 		age: 28,
@@ -57,5 +58,22 @@ describe('user ', () => {
 	/**
 	 * Tests that a valid user can be created without throwing any errors.
 	 */
+
+	it('can be created correctly', (done) => {
+		userService.addUser(users).then(data => {
+			assert.equal(data[0].age, users[0].age);
+			assert.equal(data[1].fullName, users[1].fullName);
+			assert(!data.isNew);
+			done()
+		}).catch(done)
+	});
+
+	it('can be created correctly but failed for extra space in fullName', (done) => {
+		userService.addUser(users).then(data => {
+			assert.notEqual(data[0].fullName, users[0].fullName);
+			assert(!data.isNew);
+			done()
+		}).catch(done)
+	});
 
 });

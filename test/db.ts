@@ -4,9 +4,10 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 /**
  * Connect to the in-memory database.
  */
+ var mongod: any;
 
 module.exports.connect = async () => {
-    var mongod = await MongoMemoryServer.create();
+    mongod = await MongoMemoryServer.create();
     const uri = await mongod.getUri();
     await mongoose.connect(uri);
 }
@@ -18,7 +19,7 @@ module.exports.connect = async () => {
 module.exports.closeDatabase = async () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
-    await this.mongod.stop();
+    await mongod.stop();
 }
 
 /**
