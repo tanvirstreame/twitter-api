@@ -7,6 +7,7 @@ interface IUser {
 	age: number;
 	gender: String;
 	role: String;
+	status: String;
 	avatar?: string;
 	hash: String;
 	salt: String;
@@ -43,6 +44,11 @@ const userSchema = new Schema<IUser>({
 		type: String,
 		default: "public",
 		enum: ["public", "admin", "tester",],
+	},
+	status: {
+		type: String,
+		default: "pending",
+		enum: ["pending", "verified", "block"],
 	},
 	avatar: String,
 	hash: String,
