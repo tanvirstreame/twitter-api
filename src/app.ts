@@ -1,5 +1,6 @@
 import express, { Application } from 'express'
 const bodyParser = require('body-parser')
+require("./database");
 
 const app: Application = express()
 
