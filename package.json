@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev src/app.ts",
+    "seed": "ts-node-dev seed",
     "test": "mocha --config .mocharc.json test/**/*.test.ts --timeout 50000"
   },
   "author": "Tanvir Islam Streame",
