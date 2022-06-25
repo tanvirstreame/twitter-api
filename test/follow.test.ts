@@ -3,6 +3,7 @@ import { response } from "express";
 export { };
 require("../src/bootstrap");
 const assert = require('assert');
+import { faker } from '@faker-js/faker';
 
 const followService = require("../src/follow/follow.service");
 const userService = require("../src/user/user.service");
@@ -14,9 +15,9 @@ const userService = require("../src/user/user.service");
 
 const users = [
 	{
-		fullName: "Jhon  ",
-		phone: "0171212113",
-		email: "jhonedoe@gmail.com",
+		fullName: faker.name.findName(),
+		phone: faker.phone.number(),
+		email: faker.internet.email(),
 		age: 28,
 		gender: "male",
 		role: "public",
@@ -25,9 +26,9 @@ const users = [
 		password: "1234"
 	},
 	{
-		fullName: "Labib",
-		phone: "0175515115",
-		email: "Labib@gmail.com",
+		fullName: faker.name.findName(),
+		phone: faker.phone.number(),
+		email: faker.internet.email(),
 		age: 20,
 		gender: "male",
 		role: "public",
@@ -49,7 +50,12 @@ describe('follow ', () => {
 
 	it('can be created correctly', async () => {
 
-		const userList = await userService.addUser(users);
+		let userList = [];
+		for(let user of users) {
+			const { userData } = await userService.addUser(user)
+			userList.push(userData);
+		}
+		
 		const data = await followService.addFollow({
 			followee: userList?.[0]?._id,
 			follower: userList?.[1]?._id

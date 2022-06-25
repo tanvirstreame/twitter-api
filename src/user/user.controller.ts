@@ -4,7 +4,7 @@ const userService = require("./user.service");
 
 exports.signup = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const token = await userService.addUser(req.body);
+		const { token } = await userService.addUser(req.body);
 		return res.status(201).json({
 			token,
 			message: "User registered succuesfully",

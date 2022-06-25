@@ -212,20 +212,23 @@ describe('tweet ', () => {
 
 	it('can be created correctly', async () => {
 
-		const userData = await userService.addUser(users[0]);
+		const { userData } = await userService.addUser(users[0]);
 		const data = await tweetService.addTweet({
 			user: userData?._id,
 			post: posts[0]?.post
 		});
-		console.log('data', data)
 		assert.equal(data.post, posts[0].post);
 		assert(!data.isNew);
 	});
 
 	it('get tweets from followee', async () => {
 
-		const userList = await userService.addUser(users);
-
+		let userList = [];
+		for(let user of users) {
+			const { userData } = await userService.addUser(user)
+			userList.push(userData);
+		}
+	
 		await tweetService.addTweet({
 			user: userList[0]?._id,
 			post: posts[0]?.post
@@ -274,7 +277,6 @@ describe('tweet ', () => {
 		const tweetData = await tweetService.getTweets({
 			user: userList[1]?._id,
 		});
-
 
 		assert.equal(tweetData[0].fullName, userList[0]?.fullName);
 		assert.equal(tweetData[0].post, posts[0]?.post);

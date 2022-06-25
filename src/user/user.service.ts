@@ -4,11 +4,11 @@ const User = model("User");
 const { issueJWT, genPassword, validPassword } = require("../utils/jwt")
 
 exports.addUser = async (data: any) => {
-	const userInfo = await User.create({ ...data, ...genPassword(data?.password) });
-	const _id = userInfo?._id;
+	const userData = await User.create({ ...data, ...genPassword(data?.password) });
+	const _id = userData?._id;
 	if (_id) {
 		const { token } = issueJWT(_id);
-		return token
+		return { userData, token }
 	}
 	else return;
 }

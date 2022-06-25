@@ -1,6 +1,7 @@
 export { };
 require("../src/bootstrap");
 const assert = require('assert');
+import { faker } from '@faker-js/faker';
 
 const userService = require("../src/user/user.service");
 
@@ -10,9 +11,9 @@ const userService = require("../src/user/user.service");
 
 const users = [
 	{
-		fullName: "Jhon  ",
-		phone: "0171212113",
-		email: "jhonedoe@gmail.com",
+		fullName: faker.name.findName() + " ",
+		phone: faker.phone.number(),
+		email: faker.internet.email(),
 		age: 28,
 		gender: "male",
 		role: "public",
@@ -21,9 +22,9 @@ const users = [
 		password: "1234"
 	},
 	{
-		fullName: "Labib",
-		phone: "0175515115",
-		email: "Labib@gmail.com",
+		fullName: faker.name.findName(),
+		phone: faker.phone.number(),
+		email: faker.internet.email(),
 		age: 20,
 		gender: "male",
 		role: "public",
@@ -44,22 +45,19 @@ describe('user ', () => {
 	 * Tests that a valid user can be created without throwing any errors.
 	 */
 
-	it('can be created correctly', (done) => {
-		userService.addUser(users).then(data => {
-			assert.equal(data[0].age, users[0].age);
-			assert.equal(data[1].fullName, users[1].fullName);
-			assert(!data.isNew);
-			done()
-		}).catch(done)
+	it('can be created correctly', async () => {
+		const  { userData } = await userService.addUser(users[0]);
+		assert.equal(userData.age, users[0].age);
+		assert.equal(userData.phone, users[0].phone);
+		assert(!userData.isNew);
+		
 	});
 
 
-	it('can be created correctly but failed for extra space in fullName', (done) => {
-		userService.addUser(users).then(data => {
-			assert.notEqual(data[0].fullName, users[0].fullName);
-			assert(!data.isNew);
-			done()
-		}).catch(done)
+	it('can be created correctly but failed for extra space in fullName', async () => {
+		const  { userData } = await userService.addUser(users[0]);
+		assert.notEqual(userData.fullName, users[0].fullName);
+		assert(!userData.isNew);
 	});
 
 });
