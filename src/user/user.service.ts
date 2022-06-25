@@ -30,6 +30,9 @@ exports.login = async (data: any) => {
 		const { token } = issueJWT(user);
 		return token;
 	}
+	else {
+		throw new Error("Wrong credintial!");
+	}
 }
 
 exports.getUsers = async (filter: any) => {

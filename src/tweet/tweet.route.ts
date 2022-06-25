@@ -10,9 +10,15 @@ router.post(
 );
 
 router.get(
-	"/",
+	"/feed",
 	passport.authenticate("jwt", { session: false }),
 	tweeterController.getTweets
+);
+
+router.get(
+	"/",
+	passport.authenticate("jwt", { session: false }),
+	tweeterController.getSingleTweets
 );
 
 module.exports = router;
