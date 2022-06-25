@@ -14,7 +14,8 @@ const tweetSchema = new Schema<ITweet>(
 		},
 		post: {
 			type: String,
-			required: true
+			required: true,
+			minlength: 10,
 		},
 	},
 	{

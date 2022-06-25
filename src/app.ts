@@ -1,10 +1,12 @@
 import express, { Application } from 'express'
 const bodyParser = require('body-parser')
 const passport = require("passport");
+const helmet = require("helmet");
 require("./bootstrap");
 require("./database");
 
 const app: Application = express()
+app.use(helmet());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -20,10 +22,10 @@ app.use(passport.initialize());
 app.use(require("./router"));
 
 app.use((err, req, res, next) => {
-    return res.status(500).json({
-        message: err?.message,
-        succuess: false
-    })
+	return res.status(500).json({
+		message: err?.message,
+		succuess: false
+	})
 })
 
 const port = 8080

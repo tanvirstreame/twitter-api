@@ -17,23 +17,34 @@ const userSchema = new Schema<IUser>({
 	fullName: {
 		type: String,
 		trim: true,
-		required: true
+		required: true,
+		minlength: 4
 	},
 	phone: {
 		type: String,
 		unique: true,
-		index: true
+		index: true,
+		minlength: 4
 	},
 	email: {
 		type: String,
 		unique: true,
 		trim: true,
 		lowercase: true,
-		index: true
+		index: true,
+		minlength: 4,
+		validate: {
+			validator: function (v) {
+				return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+			},
+			message: "Please enter a valid email"
+		},
 	},
-	age: { 
-		type: Number, 
-		required: true 
+	age: {
+		type: Number,
+		required: true,
+		max: 90,
+		min: [18, 'Your age is not eligle']
 	},
 	gender: {
 		type: String,
@@ -47,7 +58,7 @@ const userSchema = new Schema<IUser>({
 	},
 	status: {
 		type: String,
-		default: "pending",
+		default: "verified",
 		enum: ["pending", "verified", "block"],
 	},
 	avatar: String,
@@ -55,7 +66,7 @@ const userSchema = new Schema<IUser>({
 		type: String,
 		required: true
 	},
-	salt:  {
+	salt: {
 		type: String,
 		required: true
 	},
@@ -63,10 +74,10 @@ const userSchema = new Schema<IUser>({
 
 declare global {
 	namespace Express {
-	  interface Request {
-		user: IUser //or other type you would like to use
-	  }
+		interface Request {
+			user: IUser //or other type you would like to use
+		}
 	}
-  }
+}
 
 model('User', userSchema);
