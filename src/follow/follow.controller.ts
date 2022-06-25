@@ -4,7 +4,7 @@ const followService = require("./follow.service");
 
 exports.addFollow = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		await followService.addFollow(req.body);
+		await followService.addFollow({followee: req.params.userId, follower: req.user});
 		return res.status(201).json({
 			message: "Followed succuesfully"
 		})

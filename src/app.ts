@@ -1,5 +1,6 @@
 import express, { Application } from 'express'
 const bodyParser = require('body-parser')
+const passport = require("passport");
 require("./bootstrap");
 require("./database");
 
@@ -10,6 +11,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json());
+
+// Pass the global passport object into the configuration function
+require("./config/passport")(passport);
+app.use(passport.initialize());
+
 
 app.use(require("./router"));
 

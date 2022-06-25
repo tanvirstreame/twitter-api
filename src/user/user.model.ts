@@ -61,4 +61,12 @@ const userSchema = new Schema<IUser>({
 	},
 });
 
+declare global {
+	namespace Express {
+	  interface Request {
+		user: IUser //or other type you would like to use
+	  }
+	}
+  }
+
 model('User', userSchema);
