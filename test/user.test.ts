@@ -1,9 +1,8 @@
+export { };
 require("../src/bootstrap");
 const assert = require('assert');
 
-const { connect, clearDatabase, closeDatabase } = require('../test/db.ts');
 const userService = require("../src/user/user.service");
-
 
 /**
  * Create user
@@ -34,25 +33,11 @@ const users = [
 	}
 ];
 
-/**
- * Connect to a new in-memory database before running any tests.
- */
-
-before(async () => await connect());
-
-/**
- * Clear all test data after every test.
- */
-afterEach(async () => await clearDatabase());
-
-/**
- * Remove and close the db and server.
- */
-after(async () => await closeDatabase());
 
 /**
  * User test suite.
  */
+
 describe('user ', () => {
 
 	/**
@@ -67,6 +52,7 @@ describe('user ', () => {
 			done()
 		}).catch(done)
 	});
+
 
 	it('can be created correctly but failed for extra space in fullName', (done) => {
 		userService.addUser(users).then(data => {

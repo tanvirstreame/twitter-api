@@ -6,7 +6,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
  */
  var mongod: any;
 
-module.exports.connect = async () => {
+const connect = async () => {
     mongod = await MongoMemoryServer.create();
     const uri = await mongod.getUri();
     await mongoose.connect(uri);
@@ -16,7 +16,7 @@ module.exports.connect = async () => {
  * Drop database, close the connection and stop mongod.
  */
 
-module.exports.closeDatabase = async () => {
+const closeDatabase = async () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
     await mongod.stop();
@@ -26,7 +26,7 @@ module.exports.closeDatabase = async () => {
  * Remove all the data for all db collections.
  */
 
-module.exports.clearDatabase = async () => {
+const clearDatabase = async () => {
     const collections = mongoose.connection.collections;
 
     for (const key in collections) {
@@ -34,3 +34,21 @@ module.exports.clearDatabase = async () => {
         await collection.deleteMany();
     }
 }
+
+
+/**
+ * Connect to a new in-memory database before running any tests.
+ */
+
+ before(async () => await connect());
+
+ /**
+  * Clear all test data after every test.
+  */
+ afterEach(async () => await clearDatabase());
+ 
+ /**
+  * Remove and close the db and server.
+  */
+ after(async () => await closeDatabase());
+ 
