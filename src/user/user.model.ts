@@ -51,8 +51,14 @@ const userSchema = new Schema<IUser>({
 		enum: ["pending", "verified", "block"],
 	},
 	avatar: String,
-	hash: String,
-	salt: String,
+	hash: {
+		type: String,
+		required: true
+	},
+	salt:  {
+		type: String,
+		required: true
+	},
 });
 
 model('User', userSchema);
