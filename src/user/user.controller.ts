@@ -3,6 +3,11 @@ import { Request, Response, NextFunction } from "express";
 const userService = require("./user.service");
 
 exports.signup = async (req: Request, res: Response, next: NextFunction) => {
+
+	/**
+	 *  User signup are here
+	 */
+
 	try {
 		const { token } = await userService.addUser(req.body);
 		return res.status(201).json({
@@ -17,6 +22,11 @@ exports.signup = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 exports.login = async (req: Request, res: Response, next: NextFunction) => {
+	
+	/**
+	 *  User login are here
+	 */
+	
 	try {
 		const token = await userService.login(req.body);
 		return res.status(201).json({

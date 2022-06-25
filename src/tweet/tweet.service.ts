@@ -6,10 +6,19 @@ const Follow = model("Follow");
 
 
 exports.addTweet = async (data: any) => {
+
+	/**
+	 *  Create tweet
+	 */
+
 	return await Tweet.create(data);
 }
 
 exports.getSingleTweets = async (filter: any) => {
+
+	/**
+	 *  Get single user tweets
+	 */
 
 	const page: number = filter?.page || 1;
 	const PAGE_SIZE = 10;
@@ -54,11 +63,15 @@ exports.getSingleTweets = async (filter: any) => {
 		}
 	]);
 
-	return {data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count };
+	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0 };
 }
 
 
 exports.getTweets = async (filter: any) => {
+
+	/**
+	 *  Get tweets from the followee users
+	 */
 
 	const page: number = filter?.page || 1;
 	const PAGE_SIZE = 10;
@@ -112,18 +125,18 @@ exports.getTweets = async (filter: any) => {
 				}
 			},
 			{
-        $facet: {
-          data: [
-            { $skip: skip },
-            { $limit: PAGE_SIZE }
-          ],
-          total: [
-            { "$count": "count" }
-          ]
-        }
-      }
+				$facet: {
+					data: [
+						{ $skip: skip },
+						{ $limit: PAGE_SIZE }
+					],
+					total: [
+						{ "$count": "count" }
+					]
+				}
+			}
 		]
 	)
-	return {data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count };
+	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0 };
 
 }

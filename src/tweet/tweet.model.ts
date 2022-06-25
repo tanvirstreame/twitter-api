@@ -1,5 +1,8 @@
 import { Types, Schema, model } from 'mongoose';
 
+/**
+ * Tweet schema is here
+ */
 interface ITweet {
 	user: Types.ObjectId;
 	post: String;
@@ -10,7 +13,8 @@ const tweetSchema = new Schema<ITweet>(
 		user: {
 			type: Schema.Types.ObjectId,
 			ref: "User",
-			required: true
+			required: true,
+			index: true
 		},
 		post: {
 			type: String,
@@ -22,5 +26,7 @@ const tweetSchema = new Schema<ITweet>(
 		timestamps: true,
 	}
 );
+
+tweetSchema.index({createdAt : -1});
 
 model('Tweet', tweetSchema);
