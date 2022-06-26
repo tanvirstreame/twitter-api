@@ -19,7 +19,7 @@ const options = {
 module.exports = async (passport) => {
   passport.use(
     new JwtStrategy(options,  (jwt_payload, done) => {
-      User.findOne({ _id: jwt_payload.sub }, (err, user) => {
+      User.findOne({ _id: jwt_payload.sub }, ["_id", "fullName", "email", "phone", "role", "status"], (err, user) => {
         if (err) {
           return done(err, false);
         }
@@ -38,6 +38,6 @@ module.exports = async (passport) => {
     })
   );
 
-  // passport.use(new AnonymousStrategy());
+  passport.use(new AnonymousStrategy());
 
 };

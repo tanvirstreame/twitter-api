@@ -15,7 +15,9 @@ exports.addUser = async (data: any) => {
 		const { token } = issueJWT(_id);
 		return { userData, token }
 	}
-	else return;
+	else {
+		throw new Error("Registration failed");
+	};
 }
 
 exports.login = async (data: any) => {
@@ -26,10 +28,14 @@ exports.login = async (data: any) => {
 
 	const user = await User.findOne({ email: data.email });
 	if (!user) {
-		throw new Error("Could not find user");
+		let error: any = new Error("User not found")
+		error.status = 404;
+		throw error;
 
 	} else if (user.status === "block") {
-		throw new Error("This user has been blocked");
+		let error: any = new Error("This user has been blocked")
+		error.status = 403;
+		throw error;
 	}
 	const isValid = validPassword(
 		data.password,
@@ -41,12 +47,14 @@ exports.login = async (data: any) => {
 		return token;
 	}
 	else {
-		throw new Error("Wrong credintial!");
+		let error: any = new Error("Invalid credintial")
+		error.status = 404;
+		throw error;
 	}
 }
 
 exports.getUsers = async (filter: any) => {
-	
+
 	/**
 	 * Get all users here
 	 */

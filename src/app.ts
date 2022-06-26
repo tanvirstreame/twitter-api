@@ -22,9 +22,9 @@ app.use(passport.initialize());
 app.use(require("./router"));
 
 app.use((err, req, res, next) => {
-	return res.status(500).json({
+	return res.status(err.status || 500).json({
 		message: err?.message,
-		succuess: false
+		success: false
 	})
 })
 
