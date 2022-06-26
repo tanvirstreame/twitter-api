@@ -60,14 +60,14 @@ GET /api/v1/tweets/feeds?limit=10&offset=0
     "totalCount": 0,
     "itemPerPage": 10,
     "totalPage": 1,
-    "succuss": true
+    "success": true
 }
 ```
 
 ```javascript
 {
     "message": "Tweet saved successfully",
-    "succuss": true
+    "success": true
 }
 ```
 

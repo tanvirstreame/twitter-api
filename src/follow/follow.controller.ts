@@ -12,7 +12,7 @@ exports.addFollow = async (req: Request, res: Response, next: NextFunction) => {
 		await followService.addFollow({followee: req.params.userId, follower: req.user});
 		return res.status(201).json({
 			message: "Followed succuesfully",
-			succuse: true
+			success: true
 		})
 	}
 	catch (error) {

@@ -12,7 +12,7 @@ exports.addTweet = async (req: Request, res: Response, next: NextFunction) => {
 		await tweetService.addTweet({ post: req.body.post, user: req.user });
 		return res.status(201).json({
 			message: "Tweet saved successfully",
-			succuss: true
+			success: true
 		})
 	}
 	catch (error) {
@@ -34,7 +34,7 @@ exports.getTweets = async (req: Request, res: Response, next: NextFunction) => {
 			totalCount: data?.totalCount,
 			itemPerPage: data?.itemPerPage,
 			totalPage: Math.ceil(data?.totalCount / data?.itemPerPage),
-			succuss: true
+			success: true
 		})
 	}
 	catch (error) {
@@ -55,7 +55,7 @@ exports.getSingleTweets = async (req: Request, res: Response, next: NextFunction
 			totalCount: data?.totalCount,
 			itemPerPage: data?.itemPerPage,
 			totalPage: Math.ceil(data?.totalCount / data?.itemPerPage),
-			succuss: true
+			success: true
 		})
 	}
 	catch (error) {
