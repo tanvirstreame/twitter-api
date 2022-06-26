@@ -14,7 +14,7 @@ router.post(
 );
 
 router.get(
-	"/feed",
+	"/feeds",
 	passport.authenticate("jwt", { session: false }),
 	tweeterController.getTweets
 );

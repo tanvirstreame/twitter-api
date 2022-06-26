@@ -26,18 +26,15 @@ import { faker } from '@faker-js/faker';
 		if (i % 6 == 0) {
 			tweetUserCount++;
 		}
-		console.log("userList[tweetUserCount]?._id",userList[tweetUserCount]?._id)
-		if(userList[tweetUserCount]?._id) {
+		if (userList[tweetUserCount]?._id) {
 			await tweetService.addTweet({
 				user: userList[tweetUserCount]?._id,
 				post: faker.lorem.paragraph()
 			})
 		}
-		
-
 	}
 
-	for(let i = 1; i < 39; i++) {
+	for (let i = 1; i < 39; i++) {
 
 		await followService.addFollow({
 			followee: userList[i],
@@ -45,7 +42,9 @@ import { faker } from '@faker-js/faker';
 		})
 
 	}
-	console.log("userList", userList)
+	console.log("first user", userList[0]);
+
+	console.log("Seeding completed")
 
 
 })()

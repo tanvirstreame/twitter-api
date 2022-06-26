@@ -339,7 +339,7 @@ describe('tweet ', () => {
 
 		const res = await chai
 			.request(baseUrl)
-			.get("/api/v1/tweets/feed")
+			.get("/api/v1/tweets/feeds")
 			.set({ Authorization: userSignUpResponse.body.token });
 
 		res.body.should.be.a('object');

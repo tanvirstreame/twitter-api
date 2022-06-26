@@ -63,7 +63,7 @@ exports.getSingleTweets = async (filter: any) => {
 		}
 	]);
 
-	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0 };
+	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0 ,perPage: 10  };
 }
 
 
@@ -137,6 +137,6 @@ exports.getTweets = async (filter: any) => {
 			}
 		]
 	)
-	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0 };
+	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0, perPage: 10 };
 
 }
