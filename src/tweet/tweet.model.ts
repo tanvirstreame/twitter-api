@@ -20,6 +20,7 @@ const tweetSchema = new Schema<ITweet>(
 			type: String,
 			required: true,
 			minlength: 10,
+			maxLength: 280
 		},
 	},
 	{

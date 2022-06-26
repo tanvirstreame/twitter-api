@@ -49,7 +49,7 @@ const userSchema = new Schema<IUser>(
 			type: Number,
 			required: true,
 			max: 90,
-			min: [18, 'Your age is not eligle']
+			min: [18, 'Your age is not eligible']
 		},
 		gender: {
 			type: String,

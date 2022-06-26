@@ -11,7 +11,7 @@ exports.addTweet = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		await tweetService.addTweet({ post: req.body.post, user: req.user });
 		return res.status(201).json({
-			message: "Tweet saved succuesfully",
+			message: "Tweet saved successfully",
 			succuss: true
 		})
 	}
