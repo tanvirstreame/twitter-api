@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "8b342309-5fa4-4c12-8b92-8a4c5f9af37a",
+		"name": "tweeter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6237946"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullName",
+									"value": "Tanvir Islam",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "tanvir@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01521222554",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "25",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullName",
+									"value": "Tanvir Islam",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "tanvir@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01521222554",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "25",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follows",
+			"item": [
+				{
+					"name": "Add Follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmI2ZWEyYzVjODQ2NmY1Njk1NzI4ZTciLCJpYXQiOjE2NTYxNTU2MDMuNDQ3fQ.eIpajLKdlnpA3xc5DDZfJkGkC8HDDISPm1C26Vd6EctI30fGJxMKnPsyilNY63ECJhFzT_5246aSAvv2H2vmEw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "followee",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "follower",
+									"value": "62b6da14313590fbc70e31a3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/follows/62b6d351313590fbc70e319b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"follows",
+								"62b6d351313590fbc70e319b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tweets",
+			"item": [
+				{
+					"name": "Add Tweet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmI4YWQ2OWY4YjA4ZDMwYjY1MzgzZGYiLCJpYXQiOjE2NTYyNzAxODUuNzk1fQ.bf4yQ0qHhDFs34jNyJOctv9z7tE2hYXOf_jeIUm4RuzJOlHfCmLG-aXimRH2JHWmgUAgNu07BdRCR5dv8pw7cg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "post",
+									"value": "Welcome to this world",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tweets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tweets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tweet",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmI3MGI5N2FlN2FmZjY1YmYzZDc2YzMiLCJpYXQiOjE2NTYxNjM1NTkuODN9.XisWaGaMUhhjI2mFhbcJb34qimhQRmrQn-cY8M9yVOyFyj0yFeBiay8_yyGyQiU_rnwF3r1GkkKxNCAeTn8dXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "post",
+									"value": "Welcome",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tweets/feed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tweets",
+								"feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tweet feed",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmI4OThlMDkzM2Y5NzJjNzA4N2EwM2UiLCJpYXQiOjE2NTYyNjQ5NjguNjI4fQ.DFFhaYCT8IBG-BBsKy3YNNNuM4i0VdCs11jUytV8XSkwoob-ellO7skEe2YIqoPIlVdUn3wNg9wh9MATUSQkxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "post",
+									"value": "Welcome",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tweets/feeds",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tweets",
+								"feeds"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
