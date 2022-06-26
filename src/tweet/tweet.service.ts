@@ -20,11 +20,9 @@ exports.getSingleTweets = async (filter: any) => {
 	 *  Get single user tweets
 	 */
 
-	const page: number = filter?.page || 1;
-	const PAGE_SIZE = 10;
-	const skip: number = (page - 1) * PAGE_SIZE;
+	const limit: number = Number(filter?.limit || 10);
+	const offset: number = Number(filter?.offset || 0);
 
-	delete filter.page;
 	const data = await Tweet.aggregate([
 		{
 			$match: {
@@ -53,8 +51,8 @@ exports.getSingleTweets = async (filter: any) => {
 		{
 			$facet: {
 				data: [
-					{ $skip: skip },
-					{ $limit: PAGE_SIZE }
+					{ $skip: offset },
+					{ $limit: limit }
 				],
 				total: [
 					{ "$count": "count" }
@@ -63,7 +61,7 @@ exports.getSingleTweets = async (filter: any) => {
 		}
 	]);
 
-	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0 ,perPage: 10  };
+	return { data: data?.[0]?.data, totalCount: data?.[0]?.total?.[0]?.count || 0, itemPerPage: limit };
 }
 
 
@@ -73,11 +71,8 @@ exports.getTweets = async (filter: any) => {
 	 *  Get tweets from the followee users
 	 */
 
-	const page: number = filter?.page || 1;
-	const PAGE_SIZE = 10;
-	const skip: number = (page - 1) * PAGE_SIZE;
-
-	delete filter.page;
+	const limit: number = Number(filter?.limit || 10);
+	const offset: number = Number(filter?.offset || 0);
 
 	const data = await Follow.aggregate(
 		[
@@ -127,8 +122,8 @@ exports.getTweets = async (filter: any) => {
 			{
 				$facet: {
 					data: [
-						{ $skip: skip },
-						{ $limit: PAGE_SIZE }
+						{ $skip: offset },
+						{ $limit: limit }
 					],
 					total: [
 						{ "$count": "count" }
@@ -137,6 +132,6 @@ exports.getTweets = async (filter: any) => {
 			}
 		]
 	)
-	return { data: data?.[0]?.data, total: data?.[0]?.total?.[0]?.count || 0, perPage: 10 };
+	return { data: data?.[0]?.data, totalCount: data?.[0]?.total?.[0]?.count || 0, itemPerPage: limit };
 
 }

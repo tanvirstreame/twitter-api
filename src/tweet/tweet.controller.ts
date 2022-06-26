@@ -28,11 +28,12 @@ exports.getTweets = async (req: Request, res: Response, next: NextFunction) => {
 	 */
 
 	try {
-		const data = await tweetService.getTweets({ user: req.user });
+		const data = await tweetService.getTweets({ ...req.query, user: req.user });
 		return res.status(200).json({
 			data: data?.data,
-			total: data?.total,
-			perPage: data?.perPage,
+			totalCount: data?.totalCount,
+			itemPerPage: data?.itemPerPage,
+			totalPage: Math.ceil(data?.totalCount / data?.itemPerPage),
 			succuss: true
 		})
 	}
@@ -48,11 +49,12 @@ exports.getSingleTweets = async (req: Request, res: Response, next: NextFunction
 	 */
 
 	try {
-		const data = await tweetService.getSingleTweets({ user: req.user });
+		const data = await tweetService.getSingleTweets({ ...req.query, user: req.user });
 		return res.status(200).json({
 			data: data?.data,
-			total: data?.total,
-			perPage: data?.perPage,
+			totalCount: data?.totalCount,
+			itemPerPage: data?.itemPerPage,
+			totalPage: Math.ceil(data?.totalCount / data?.itemPerPage),
 			succuss: true
 		})
 	}
