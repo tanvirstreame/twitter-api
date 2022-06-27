@@ -1,4 +1,4 @@
-import express, { Application } from 'express'
+import express, { Application, Request, Response, NextFunction } from 'express';
 const bodyParser = require('body-parser')
 const passport = require("passport");
 const helmet = require("helmet");
@@ -21,7 +21,7 @@ app.use(passport.initialize());
 
 app.use(require("./router"));
 
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 	return res.status(err.status || 500).json({
 		message: err?.message,
 		success: false
