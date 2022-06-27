@@ -208,7 +208,7 @@ const posts = [
 /**
  * Tweet test suite.
  */
-describe('tweet ', () => {
+describe('Tweet ', () => {
 
 	/**
 	 * Tests that a valid tweet can be created without throwing any errors.
@@ -221,7 +221,7 @@ describe('tweet ', () => {
 	})
 
 
-	it('can be created correctly', async () => {
+	it('Tweet can be created successfully', async () => {
 
 		let userList = await userService.getUsers();
 
@@ -233,7 +233,7 @@ describe('tweet ', () => {
 		assert(!data.isNew);
 	});
 
-	it('get tweets from followee', async () => {
+	it('Get tweets from followee', async () => {
 
 		let userList = await userService.getUsers();
 
@@ -291,7 +291,7 @@ describe('tweet ', () => {
 
 	});
 
-	it("tweer single user api", async () => {
+	it("Tweet single user api", async () => {
 		require("../src/app");
 
 		const userSignUpResponse = await chai
@@ -316,10 +316,11 @@ describe('tweet ', () => {
 
 		res.body.should.be.a('object');
 		res.should.to.be.json;
+		res.body.should.have.property('success');
 		assert.strictEqual(res.status, 200, "http status should be 200");
 	});
 
-	it("tweer feed api", async () => {
+	it("Tweet feeds api", async () => {
 		require("../src/app")
 
 		const userSignUpResponse = await chai
@@ -344,6 +345,7 @@ describe('tweet ', () => {
 
 		res.body.should.be.a('object');
 		res.should.to.be.json;
+		res.body.should.have.property('success');
 		assert.strictEqual(res.status, 200, "http status should be 200");
 	});
 

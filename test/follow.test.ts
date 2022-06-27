@@ -1,6 +1,4 @@
-import { response } from "express";
-
-export { };
+export {};
 require("../src/bootstrap");
 const assert = require('assert');
 let chai = require('chai');
@@ -55,13 +53,13 @@ beforeEach(async () => {
 /**
  * Follow test suite.
  */
-describe('follow ', () => {
+describe('Follow ', () => {
 
 	/**
 	 * Tests that a valid follow can be created without throwing any errors.
 	 */
 
-	it('can be created correctly', async () => {
+	it('User can follow each other successfully', async () => {
 
 		let userList = await userService.getUsers();
 
@@ -107,14 +105,13 @@ describe('follow ', () => {
 
 		const userInfo = await User.findOne({}, ["_id"]).lean();
 
-		console.log("User", userInfo)
-
 		const res = await chai
 			.request(baseUrl)
 			.post("/api/v1/follows/" + userInfo?._id)
 			.set({ Authorization: secondUser.body.token });
 
 		res.body.should.be.a('object');
+		res.body.should.have.property('success');
 		assert.strictEqual(res.status, 201, "http status should be 201");
 	});
 });

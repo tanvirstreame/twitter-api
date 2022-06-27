@@ -1,4 +1,4 @@
-export { };
+export {};
 require("../src/bootstrap");
 const assert = require('assert');
 const chai = require('chai');
@@ -47,13 +47,13 @@ const users = [
  * User test suite.
  */
 
-describe('user ', () => {
+describe('User ', () => {
 
 	/**
 	 * Tests that a valid user can be created without throwing any errors.
 	 */
 
-	it('can be created correctly', async () => {
+	it('User can be created successfully', async () => {
 		const  { userData } = await userService.addUser(users[0]);
 		assert.equal(userData.age, users[0].age);
 		assert.equal(userData.phone, users[0].phone);
@@ -62,13 +62,13 @@ describe('user ', () => {
 	});
 
 
-	it('can be created correctly but failed for extra space in fullName', async () => {
+	it('User can be created successfully but failed to match for extra space in fullName', async () => {
 		const  { userData } = await userService.addUser(users[0]);
 		assert.notEqual(userData.fullName, users[0].fullName);
 		assert(!userData.isNew);
 	});
 
-	it("user sign up can sign up succuessfully", async () => {
+	it("User sign up can sign up succuessfully", async () => {
 		require("../src/app")
 		const res = await chai
 			.request(baseUrl)
@@ -80,7 +80,7 @@ describe('user ', () => {
 		assert.strictEqual(res.body.success, true, "This should be true");
 	});
 
-	it("user login api failed if no user found", async () => {
+	it("User login api failed if no user found", async () => {
 		require("../src/app")
 		const res = await chai
 			.request(baseUrl)
@@ -94,7 +94,7 @@ describe('user ', () => {
 	});
 
 
-	it("user login api failed if no user found", async () => {
+	it("User login success", async () => {
 		require("../src/app")
 
 		await chai
@@ -110,6 +110,7 @@ describe('user ', () => {
 		assert.strictEqual(res.status, 200, "http status should be 200");
 		res.body.should.be.a('object');
 		res.should.to.be.json;
+		res.body.should.have.property('success');
 		assert.strictEqual(res.body.success, true, "This should be true");
 	});
 
